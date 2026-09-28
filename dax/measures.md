@@ -1,4 +1,4 @@
-# DAX Measures — Shipping KPI Portfolio
+# DAX Measures — Container Shipping KPIs
 
 Paste these into Power BI Desktop after importing the star schema (`output/*.csv`
 or `output/shipping_kpis.db`). Assumes tables named as in the CSV exports:
@@ -134,7 +134,7 @@ DIVIDE ( [Actual Cost] - [Actual Cost PY], [Actual Cost PY] )
    monthly Actual vs. Budget cost.
 2. **Budget vs. Actual by Trade Lane** — matrix (trade × cost category)
    with `Cost Variance %` conditional formatting (heatmap), so over-budget
-   lanes jump out the way a Hapag-style TRACO variance report would.
+   lanes jump out the way a standard-cost variance report would.
 3. **Deficit Planning** — table filtered to `Deficit Flag = "⚠ Structural
    Deficit"`, with `Cost Variance 3M Avg` and `Full Year Run Rate (Actual)`
    next to the annual budget, to drive the re-forecast conversation.

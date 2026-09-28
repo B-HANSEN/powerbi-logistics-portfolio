@@ -1,13 +1,19 @@
-# Power BI / SQL Portfolio — Container Shipping KPIs
+# Container Shipping KPIs — Power BI / Qlik Sense / SQL
 
-A small, self-contained portfolio project built to demo Controlling/Operations
-reporting skills (Unit Cost per TEU, Budget-vs-Actual, Deficit Planning) plus
-an AI-assisted reporting workflow, in an interview-shareable form.
+A self-contained controlling data model for liner shipping, with three core
+KPIs and an AI-assisted month-end commentary:
 
-Background: 14 years at Hapag-Lloyd in Operations/Controlling (incl. Region
-Middle East), modeled here on typical liner-shipping standard-cost /
-TRACO-style reporting logic — rebuilt with synthetic data so nothing here is
-Hapag-Lloyd's real data or IP.
+- **Unit Cost per TEU**: cost per twenty-foot equivalent unit, by trade lane
+  and cost category
+- **Budget vs. Actual**: actual cost against budget/standard cost, with the
+  variance in USD and %
+- **Deficit Planning**: which trade lanes run over budget *structurally* (a
+  rolling 3-month window, not a single month), plus a full-year run rate as
+  the basis for a re-forecast decision
+
+The data is generated from a SQL star schema with Python and imported into
+Power BI (DAX measures) or Qlik Sense (load script + expressions). All data
+is synthetic.
 
 ## What's in here
 
@@ -32,15 +38,15 @@ output/                     generated on demand (git-ignored) — DB, CSVs, comm
 
 Star schema:
 - `dim_trade` — 7 trade lanes across Asia-Europe, Transatlantic, Transpacific
-  and Middle East regions (mirroring a Region Middle East-style setup)
+  and Middle East regions
 - `dim_month` — 24 months of history
 - `dim_cost_category` — standard liner cost buckets: Bunker, Vessel Charter,
   Port Charges, THC, Equipment, Feeder, Documentation
 - `fact_actual` / `fact_budget` — actual and budget/standard cost + TEU
   volume at trade × month × cost-category grain
 - `v_actual_vs_budget` — a flat, ready-to-import view combining both facts
-  with variance and unit-cost-per-TEU already calculated, for a fast Power BI
-  demo without building the star-schema relationships by hand
+  with variance and unit-cost-per-TEU already calculated, for a quick import
+  without building the star-schema relationships by hand
 
 The synthetic data is written to tell a specific, explainable story:
 - a **peak-season volume effect** (Aug–Oct) that widens Budget-vs-Actual
@@ -85,7 +91,7 @@ python3 -m pytest tests/
 3. For the star-schema route: import `dim_trade`, `dim_month`,
    `dim_cost_category`, `fact_actual`, `fact_budget` and set relationships
    on `trade_id`, `month_id`, `cost_category_id` (Model view).
-   For the quick-demo route: just import `v_actual_vs_budget` — a single
+   For the quick route: just import `v_actual_vs_budget` — a single
    flat table with variance and unit-cost already computed.
 4. Paste the measures from `dax/measures.md` into a new table
    (**Modeling → New Measure**).
@@ -104,23 +110,22 @@ The same CSVs load into Qlik Cloud Analytics (30-day free trial, browser-based):
 3. Add the master measures from [`qlik/expressions.md`](qlik/expressions.md)
    and build the same four sheets.
 
-## The "AI-assisted reporting workflow" piece
+## AI-assisted month-end commentary
 
 `scripts/ai_reporting_workflow.py` queries the latest (or a given) month,
-flags variances above threshold, and writes management-ready commentary —
-by default fully rule-based/deterministic (no API dependency, safe to run
-and demo anywhere), with an optional `--llm` flag that hands the same
-findings to Claude for a more polished narrative if an API key is present.
-This is the piece to talk through in an interview as the "AI in the
-reporting workflow" demo: the KPIs and variance detection are deterministic
-and auditable (as Controlling numbers must be), and AI is used narrowly to
-turn structured findings into readable prose — not to touch the numbers
-themselves.
+flags variances above threshold, and writes management-ready commentary.
+By default it is fully rule-based and deterministic (no API dependency),
+with an optional `--llm` flag that hands the same findings to Claude for a
+more polished narrative if an API key is present.
+
+The design principle: KPIs and variance detection stay deterministic and
+auditable, as controlling numbers must be. AI is used narrowly to turn
+structured findings into readable prose; it never touches the numbers.
 
 ## Notes
 
 - All data is synthetic, generated with a fixed random seed (`42`) for
-  reproducibility — none of it is real Hapag-Lloyd data.
+  reproducibility. It does not represent any real company's figures.
 - `output/` is git-ignored; regenerate it any time with `generate_data.py`.
 - Built and tested with Python 3.9+ — core scripts are standard library only;
   `anthropic` is needed just for the optional `--llm` step.

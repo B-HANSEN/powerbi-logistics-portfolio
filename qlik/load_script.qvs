@@ -1,5 +1,5 @@
 // ============================================================================
-// Container Shipping KPI Portfolio – Qlik Sense load script
+// Container Shipping KPIs – Qlik Sense load script
 // Same star schema as the Power BI version, loaded from the CSV exports.
 //
 // Qlik Cloud: upload output/*.csv to the "DataFiles" space, then paste this

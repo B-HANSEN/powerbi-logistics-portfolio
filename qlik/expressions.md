@@ -1,4 +1,4 @@
-# Qlik Sense Expressions — Shipping KPI Portfolio
+# Qlik Sense Expressions — Container Shipping KPIs
 
 Counterpart to [`dax/measures.md`](../dax/measures.md), for the data model
 loaded by [`load_script.qvs`](load_script.qvs). Add them as **Master items →

@@ -8,9 +8,8 @@ instead of written by hand.
 
 Two modes:
   1. Rule-based (default, no API key needed) — deterministic narrative
-     built from variance thresholds. This is what runs out of the box and
-     is what you'd show in an interview if you don't want to depend on
-     a live API call.
+     built from variance thresholds. This is what runs out of the box,
+     with no dependency on a live API call.
   2. LLM-assisted (optional) — if ANTHROPIC_API_KEY is set in the
      environment, the rule-based findings are handed to Claude to turn
      into a polished, management-ready narrative. No key is ever

@@ -1,9 +1,8 @@
 -- ============================================================================
--- Container Shipping KPI Portfolio – Star Schema
--- Author: Björn Hansen
--- Purpose: Demo data model for Power BI (Unit Cost per TEU, Budget vs Actual,
---          Deficit Planning) modeled on Hapag-Lloyd-style Operations/
---          Controlling reporting (TRACO / Standardkosten logic).
+-- Container Shipping KPIs – Star Schema
+-- Purpose: Data model for Power BI / Qlik Sense (Unit Cost per TEU,
+--          Budget vs Actual, Deficit Planning), following liner-shipping
+--          standard-cost controlling logic.
 -- ============================================================================
 
 -- ---------------------------------------------------------------------------

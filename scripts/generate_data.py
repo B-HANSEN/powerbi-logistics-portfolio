@@ -5,7 +5,7 @@ Generates a realistic synthetic container-shipping controlling dataset
 (trade lanes x months x standard cost categories) and writes it into a
 SQLite database plus flat CSV exports for Power BI import.
 
-Grain matches Hapag-Lloyd-style Operations/Controlling reporting:
+Grain follows liner-shipping standard-cost controlling:
 - dim_trade:           trade lanes / services, grouped by region & head office
 - dim_month:            24 months of history
 - dim_cost_category:    standard liner cost buckets (Bunker, THC, Equipment, ...)
