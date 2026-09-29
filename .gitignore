@@ -5,3 +5,7 @@ __pycache__/
 .venv/
 .pytest_cache/
 TODO.md
+.claude/settings.local.json
+
+# Power BI Desktop working files (binary; a text-based .pbip may be committed later)
+*.pbix
