@@ -1,8 +1,8 @@
 #!/bin/bash
 # Stop hook: run the test suite when code or schema changed this session, so
 # a turn that edited scripts/, sql/ or tests/ doesn't end on faith. A turn
-# with only doc/DAX/Qlik edits exits immediately (nothing here can test
-# those — they're verified in Power BI / Qlik by the user).
+# with only doc/DAX edits exits immediately (nothing here can test
+# those — they're verified in Power BI by the user).
 
 project_dir="${CLAUDE_PROJECT_DIR:-$PWD}"
 cd "$project_dir" || exit 0

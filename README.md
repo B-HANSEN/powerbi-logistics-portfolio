@@ -1,4 +1,4 @@
-# Container Shipping KPIs — Power BI / Qlik Sense / SQL
+# Container Shipping KPIs — Power BI / SQL
 
 A self-contained controlling data model for liner shipping, with three core
 KPIs and an AI-assisted month-end commentary:
@@ -12,8 +12,7 @@ KPIs and an AI-assisted month-end commentary:
   the basis for a re-forecast decision
 
 The data is generated from a SQL star schema with Python and imported into
-Power BI (DAX measures) or Qlik Sense (load script + expressions). All data
-is synthetic.
+Power BI (DAX measures). All data is synthetic.
 
 ## What's in here
 
@@ -26,9 +25,6 @@ scripts/
                             optional LLM-polish step)
 dax/
   measures.md               DAX measures to paste into Power BI Desktop
-qlik/
-  load_script.qvs           Qlik Sense load script (same data model)
-  expressions.md            Qlik master-measure expressions (DAX counterparts)
 tests/
   test_pipeline.py          sanity checks on generated data + commentary logic
 output/                     generated on demand (git-ignored) — DB, CSVs, commentary.md
@@ -98,17 +94,6 @@ python3 -m pytest tests/
 5. Build report pages per the suggestions at the bottom of `dax/measures.md`
    (Executive Overview, Budget vs. Actual by Trade Lane, Deficit Planning,
    AI Commentary).
-
-## Alternative: Qlik Sense (runs in the browser, works on macOS)
-
-The same CSVs load into Qlik Cloud Analytics (30-day free trial, browser-based):
-
-1. Run `generate_data.py`, upload `output/*.csv` to the **DataFiles** space.
-2. Create an app, paste [`qlik/load_script.qvs`](qlik/load_script.qvs) into
-   the **Data load editor**, reload. The script joins actual + budget into one
-   fact table to avoid a synthetic key, and fixes the decimal separator.
-3. Add the master measures from [`qlik/expressions.md`](qlik/expressions.md)
-   and build the same four sheets.
 
 ## AI-assisted month-end commentary
 

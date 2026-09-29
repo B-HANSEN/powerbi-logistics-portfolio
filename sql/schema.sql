@@ -1,6 +1,6 @@
 -- ============================================================================
 -- Container Shipping KPIs – Star Schema
--- Purpose: Data model for Power BI / Qlik Sense (Unit Cost per TEU,
+-- Purpose: Data model for Power BI (Unit Cost per TEU,
 --          Budget vs Actual, Deficit Planning), following liner-shipping
 --          standard-cost controlling logic.
 -- ============================================================================
