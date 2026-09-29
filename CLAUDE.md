@@ -28,7 +28,7 @@ Power BI Desktop and Qlik Sense can't be run from here — DAX (`dax/measures.md
 
 ## Git
 
-- **Never run `git push`.** The user pushes themselves. (A PreToolUse hook blocks it.)
+-  git push only directly after a commit the user asked for and approved (a hook lets it through within 3 minutes of that commit); any other push needs an explicit request.
 - `git commit` only when the current user message explicitly asks for it (a hook asks for confirmation every time).
 
 ## Commit messages
